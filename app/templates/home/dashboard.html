@@ -7,14 +7,40 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="intro-message">
-                    <h1>The Dashboard</h1>
-                    <h3>We made it here!</h3>
+                <div class="intro-message" align="center">
+                    <h1>Key Risk Indicators</h1>
+
                     <hr class="intro-divider">
-                    </ul>
-                </div>
+                     <caption>Data Sources</caption>
+					<table>
+					<tbody>
+	<tr>
+        <td><a href="#">California pending home sales index</a></td>
+		<td><a href="#">Euro Area CPI</a></td>
+		<td><a href="#">UK CPI</a></td>
+	</tr>
+	<tr>
+		<td><a href="#">Corelogic Home Price Index (SFA)</a></td>
+		<td><a href="#">Euro Area GDP</a></td>
+		<td><a href="#">UK GDP</a></td>
+	</tr>
+	<tr>
+		<td><a href="#">CoreLogic Home Prince Index (SFCDX)</a></td>
+		<td><a href="#">Japan CPI</a></td>
+		<td><a href="#">Unadjusted</a></td>
+	</tr>
+	<tr>
+		<td><a href="#">Corelogic Home Price Index (SFD)</a></td>
+		<td><a href="#">Japan GDP</a></td>
+		<td><a href="{{ url_for('home.logistic_regression_titanic') }}">Test data</a></td>
+	</tr>
+	</tbody>
+</table>
+                   </div>
             </div>
         </div>
+
+
     </div>
 </div>
 {% endblock %}
