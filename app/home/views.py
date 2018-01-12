@@ -33,6 +33,21 @@ def dashboard():
     return render_template('home/dashboard.html', title='Dashboard')
 
 
+@home.route('/admin/dashboard')
+@login_required
+def admin_dashboard():
+    if not current_user.is_admin:
+        abort(403)
+
+    return render_template('home/admin_dashboard.html', title='Admin dashboard')
+
+
+@home.route('/data-sources')
+@login_required
+def data_sources():
+    return render_template('home/data-sources.html', title='Data Sources')
+
+
 @home.route('/regression', methods=['GET'])
 @login_required
 def display_regression():
@@ -51,11 +66,33 @@ def display_regression():
         return "Email is valid"
 
 
-@home.route('/admin/dashboard')
+@home.route('/logistic-regression-titanic')
 @login_required
-def admin_dashboard():
-    if not current_user.is_admin:
-        abort(403)
+def logistic_regression_titanic():
+    """
+    We estimate the probabilities here
+    """
+    import pandas as pd
+    import numpy as np
+    train = pd.read_csv('titanic_train.csv')
+    table = pd.DataFrame.from_csv("titanic_train.csv")
+    data = table.to_html()#this works
+    #print(data)
+    return render_template('home/logistic-regression.html', tables=data, tabt=table, title='Admin dashboard')
 
-    return render_template('home/admin_dashboard.html', title='Admin dashboard')
 
+"""
+How to generate and display an image
+"""
+@home.route('/images/<cropzonekey>')
+def images(cropzonekey):
+    return render_template("images.html", title=cropzonekey)
+
+
+@home.route('/fig/<cropzonekey>')
+def fig(cropzonekey):
+    fig = draw_polygons(cropzonekey)
+    img = StringIO()
+    fig.savefig(img)
+    img.seek(0)
+    return send_file(img, mimetype='image/png')
