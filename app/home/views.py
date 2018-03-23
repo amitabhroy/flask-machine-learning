@@ -81,18 +81,3 @@ def logistic_regression_titanic():
     return render_template('home/logistic-regression.html', tables=data, tabt=table, title='Admin dashboard')
 
 
-"""
-How to generate and display an image
-"""
-@home.route('/images/<cropzonekey>')
-def images(cropzonekey):
-    return render_template("images.html", title=cropzonekey)
-
-
-@home.route('/fig/<cropzonekey>')
-def fig(cropzonekey):
-    fig = draw_polygons(cropzonekey)
-    img = StringIO()
-    fig.savefig(img)
-    img.seek(0)
-    return send_file(img, mimetype='image/png')
